@@ -1,0 +1,73 @@
+#! /bin/bash
+
+[ ${UID} -ne 0 ] && echo "permission denied" && exit 126
+
+cronfile=/var/spool/cron/root
+tempfile=$(mktemp)
+crontab -l | sed -n '2,$p' | cat -n > ${tempfile} || exit 1
+jobnum=$(wc -l ${tempfile} | awk '{print $1}')
+
+function func {
+    local job
+    local num=$(($1+1))
+    job=$(sed -n "${num}p" ${cronfile})
+    local stat=$(echo "${job}" | grep '^#' &> /dev/null && echo 0 || echo 1)
+    case $2 in
+    --start)
+        if [ ${stat} -eq 0 ]
+        then
+            sed -i "${num}s/^#//" $cronfile
+            date
+            echo "NO.$1 job started!"
+            exit 0
+        else
+            echo "NO.$1 job is already started!"
+            exit 1
+        fi;;
+    --status)
+        if [ ${stat} -eq 0 ]
+        then
+            echo "NO.$1 job is stopped!"
+            exit 0
+        else
+            echo "NO.$1 job is started!"
+            exit 0
+        fi;;
+    --stop)
+        if [ ${stat} -eq 0 ]
+        then
+            echo "NO.$1 job is already stopped!"
+            exit 1
+        else
+            sed -i "${num}s/^/#/" ${cronfile}
+            date
+            echo "NO.$1 job is stopped!"
+            exit 0
+        fi;;
+    esac
+}
+
+if [[ $1 == list ]]
+then    
+    cat ${tempfile}
+elif [[ $1 == help ]] || [ -z $1 ]
+then
+    echo "./cronb_ctrl list : for the cron list"
+    echo "./cronb_ctrl jobnum [options]"
+    printf "options:\n\t--start:start your cron\n\t--stop:stop your cron\n\t--status:show the cron status\n"
+elif [ $1 -le ${jobnum} ] && [ $1 -ge 1 ]
+then
+    case $2 in
+    --start | --stop | --status)
+        func $1 $2 ;;
+    *)
+        echo "wrong options!"
+        exit 1
+    esac
+else
+    echo "please input the right jobnumber"
+    exit 1
+fi
+
+rm -f ${tempfile}
+
