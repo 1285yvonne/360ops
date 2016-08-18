@@ -1,19 +1,17 @@
-ï»¿# 4 log_cutting
-
-æ ‡ç­¾ï¼ˆç©ºæ ¼åˆ†éš”ï¼‰ï¼š 360-ops
+# 4 log_cutting
 
 ---
 
-##é—®é¢˜æè¿°ï¼š
-æ—¥å¿—åˆ‡å‰²ï¼Œæœ‰è¿™æ ·ä¸€ä¸ªaccess.logæ¯å¤©ä¼šæ‰“å‡ºå¤§é‡çš„æ—¥å¿—ã€‚å®žçŽ°ä¸€ä¸ªæ—¥å¿—åˆ‡å‰²çš„åŠŸèƒ½ï¼Œå¹¶è¯´æ˜Žè¯¥å®žçŽ°æ–¹å¼ä¼šæœ‰ä»€ä¹ˆç¼ºé™·ã€‚
+##ÎÊÌâÃèÊö£º
+ÈÕÖ¾ÇÐ¸î£¬ÓÐÕâÑùÒ»¸öaccess.logÃ¿Ìì»á´ò³ö´óÁ¿µÄÈÕÖ¾¡£ÊµÏÖÒ»¸öÈÕÖ¾ÇÐ¸îµÄ¹¦ÄÜ£¬²¢ËµÃ÷¸ÃÊµÏÖ·½Ê½»áÓÐÊ²Ã´È±ÏÝ¡£
 
 
 ----------
 
 
-##ç­”ï¼š
-åˆ©ç”¨```logrotate```åˆ†å‰²ç®¡ç†æ—¥å¿—ï¼Œä»¥Apacheçš„æ—¥å¿—æ–‡ä»¶ä¸ºä¾‹
-åœ¨ç›®å½•```/etc/logrotate.d```ä¸‹å»ºç«‹é…ç½®æ–‡ä»¶```apache```ï¼Œå†…å®¹å¦‚ä¸‹ï¼š
+##´ð£º
+ÀûÓÃ```logrotate```·Ö¸î¹ÜÀíÈÕÖ¾£¬ÒÔApacheµÄÈÕÖ¾ÎÄ¼þÎªÀý
+ÔÚÄ¿Â¼```/etc/logrotate.d```ÏÂ½¨Á¢ÅäÖÃÎÄ¼þ```apache```£¬ÄÚÈÝÈçÏÂ£º
 ```
 /usr/local/apache2.4/logs/access_log
 {
@@ -21,18 +19,18 @@ notifempty
 daily
 error root
 rotate 1
-create 0644 root root
-olddir /home/cyf/logs #å°†è½¬å‚¨çš„æ–‡ä»¶å­˜åœ¨ç›®å½•/home/cyf/logs
+create 0644 root root #ÐÂ½¨¿ÕµÄÈÕÖ¾ÎÄ¼þ
+olddir /home/cyf/logs #½«×ª´¢µÄÎÄ¼þ´æÔÚÄ¿Â¼/home/cyf/logs
 postrotate
-#å°†è½¬å‚¨çš„æ—¥å¿—æ–‡ä»¶åæ”¹ä¸ºå¹´æœˆæ—¥çš„æ ¼å¼å¦‚ï¼š2016.Aug.18
+#½«×ª´¢µÄÈÕÖ¾ÎÄ¼þÃû¸ÄÎªÄêÔÂÈÕµÄ¸ñÊ½Èç£º2016.Aug.18
 mv /home/cyf/logs/access_log.1 /home/cyf/logs/$(date | awk '{OFS=".";print $6 OFS $2 OFS $3}')
 endscript
 }
 ```
-é€šè¿‡crontabç¨‹åºæ¯å¤©23:59åˆ†æ‰§è¡Œä¸€æ¬¡
+Í¨¹ýcrontab³ÌÐòÃ¿Ìì23:59·ÖÖ´ÐÐÒ»´Î
 ```
 59 23 * * * /usr/sbin/logrotate -f /etc/logrotate.d/apache
 ```
-
+È±ÏÝ£ºÕâÖÖ·½·¨¼ÙÉèÈÕÖ¾ÎÄ¼þÖÐµÄ¼ÇÂ¼ÈÕÆÚ¶¼ÊÇÍ¬Ò»Ìì£¬ÎÞ·¨´¦ÀíÈÕÖ¾ÖÐ´æÔÚ²»Í¬ÌìÊýµÄÇé¿ö
 
 

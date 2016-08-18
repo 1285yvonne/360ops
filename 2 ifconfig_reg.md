@@ -1,20 +1,18 @@
-ï»¿# 2 ifconfig_reg
-
-æ ‡ç­¾ï¼ˆç©ºæ ¼åˆ†éš”ï¼‰ï¼š 360-ops
+# 2 ifconfig_reg
 
 ---
 
-##é—®é¢˜æè¿°
-è§£æžifconfigå‘½ä»¤çš„æ ‡å‡†è¾“å‡ºï¼Œè¿”å›žä¸€ä¸ªhashã€‚keyæ˜¯ç½‘å¡åç§° valueæ˜¯å¯¹åº”çš„ipã€‚
+##ÎÊÌâÃèÊö
+½âÎöifconfigÃüÁîµÄ±ê×¼Êä³ö£¬·µ»ØÒ»¸öhash¡£keyÊÇÍø¿¨Ãû³Æ valueÊÇ¶ÔÓ¦µÄip¡£
 
-##ç­”ï¼š
-æˆ‘å–œæ¬¢å°†awkå‘½ä»¤å†™è¿›scriptä¸­è°ƒç”¨ï¼šç”±äºŽé¢˜ç›®ä¸­è¯´éœ€è¦è¿”å›žä¸€ä¸ªhashï¼Œæˆ‘è®¾äº†ä¸€ä¸ªæ•°ç»„å˜é‡ç”¨æ¥å­˜æ”¾ç»“æžœï¼Œè¯¦è§2.awk
+##´ð£º
+ÎÒÏ²»¶½«awkÃüÁîÐ´½øscriptÖÐµ÷ÓÃ£ºÓÉÓÚÌâÄ¿ÖÐËµÐèÒª·µ»ØÒ»¸öhash£¬ÎÒÉèÁËÒ»¸öÊý×é±äÁ¿ÓÃÀ´´æ·Å½á¹û£¬Ïê¼û2.awk
 
-ç„¶åŽè°ƒç”¨è„šæœ¬ï¼š
+È»ºóµ÷ÓÃ½Å±¾£º
 
 ```
 ifconfig | awk -f 2.awk
-è¾“å‡ºç»“æžœï¼š
+Êä³ö½á¹û£º
 name: docker0 ip:172.17.0.1
 name: eth0 ip:10.104.32.39
 name: lo ip:127.0.0.1
