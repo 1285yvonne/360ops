@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 __author__ = 'cyf'
 
 """
@@ -59,7 +59,7 @@ class Tree(object):
             print 'there is no %d node!' % k
             return False
         if len(k_t.childTree) < 1:  # 父节点k本身就是个叶子节点
-            leaves.append(k_t.key)
+            leaves.append(k_t)
             return leaves
         temp = [k_t]  # 父节点k不是叶子节点
         while len(temp) > 0:
