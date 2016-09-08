@@ -18,12 +18,9 @@ notifempty
 daily
 error root
 rotate 1
-create 0644 root root
-olddir /home/cyf/logs #将转储的文件存在目录/home/cyf/logs
-postrotate
-#将转储的日志文件名改为年月日的格式如：2016.Aug.18
-mv /home/cyf/logs/access_log.1 /home/cyf/logs/$(date +"%y-%m-%d")
-endscript
+copytruncate
+nocreate
+dateext
 }
 ```
 通过crontab程序每天23:59分执行一次
